@@ -1,10 +1,11 @@
 const path = require('path')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+ const { VueLoaderPlugin } = require('vue-loader')
 
 const isPro = process.env.NODE_ENV === 'production'
 const resolve = dir => path.resolve(__dirname, '../', dir)
 
 module.exports = {
+	context: resolve(''),
 	mode: isPro ? 'production' : 'development',
 	output: {
 		path: resolve('statics'),

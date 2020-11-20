@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const WebpackBar = require('webpackbar')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const base = require('./webpack.base.config')
 
@@ -21,11 +22,31 @@ let plugins = [
 if (isPro) {
 	plugins.push(
 		new WebpackBar(),
-		new CompressionPlugin()
+		new CompressionPlugin(),
+		new MiniCssExtractPlugin({
+      filename: '[name].[chunkhash].css',
+      chunkFilename: '[id].[chunkhash].css',
+    })
 	)
 }
 
 module.exports = merge(base, {
 	entry: path.resolve(__dirname, '../client/entry-client.js'),
+	module: {
+		rules: [{
+			test: /\.css$/,
+			use: [
+				isPro ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+				'css-loader'
+			]
+		}, {
+			test: /\.less$/,
+			use: [
+				isPro ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+				'css-loader',
+				'less-loader'
+			]
+		}]
+	},
 	plugins
 })
