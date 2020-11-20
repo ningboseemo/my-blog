@@ -1,5 +1,8 @@
-import createApp from './createApp.js'
+import { createApp } from './createApp.js'
 
-const { app } = createApp()
+const { app, router } = createApp()
 
-app.$mount('#app')
+router.onReady(() => {
+	console.log('--------')
+	app.$mount('#app')
+})

@@ -4,6 +4,9 @@
   "description": "常宁波的博客",
   "main": "index.js",
   "scripts": {
+    "build:client": "cross-env NODE_ENV=production webpack --config ./build/webpack.client.config.js",
+		"build:server": "cross-env NODE_ENV=production webpack --config ./build/webpack.server.config.js",
+		"build": "npm run build:client && npm run build:server",
     "dev": "cross-env NODE_ENV=development node ./server/index.js ",
     "server": "cross-env NODE_ENV=production node ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,9 +19,27 @@
     "express": "^4.17.1",
     "serve-favicon": "^2.5.0",
     "vue": "^2.6.12",
-    "vue-server-renderer": "^2.6.12"
+    "vue-router": "^3.4.9",
+    "vue-server-renderer": "^2.6.12",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "compression-webpack-plugin": "^6.1.1",
+    "cross-env": "^7.0.2",
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.1",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^2.5.2",
+    "webpackbar": "^5.0.0-3"
   }
 }
